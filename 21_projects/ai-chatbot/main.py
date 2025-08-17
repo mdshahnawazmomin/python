@@ -27,7 +27,7 @@ def completion(message):
         "content": chat_completion.choices[0].message.content
     }
     messages.append(message)
-    print(f"Jarvis: {message["content"]}")
+    print(f"Jarvis: {message['content']}")
 
 if __name__ == "__main__":
     print(f"Jarvis: Hi I am Jarvis, How may I help you\n")

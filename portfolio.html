@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio | Full Stack Python & Gen AI</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #101c2e;
+      --panel-2: #16253b;
+      --text: #f4f7fb;
+      --muted: #9fb0c7;
+      --accent: #4cc9f0;
+      --accent-2: #7b61ff;
+      --success: #34d399;
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+
+    body.light-theme {
+      --bg: #f5f8ff;
+      --panel: #ffffff;
+      --panel-2: #eef4ff;
+      --text: #10233a;
+      --muted: #5b6b7d;
+      --accent: #2563eb;
+      --accent-2: #7b61ff;
+      --border: rgba(16, 35, 58, 0.12);
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #07111f 0%, #101c2e 45%, #18263f 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .page { max-width: 1200px; margin: 0 auto; padding: 24px 20px 60px; }
+    .hero, .card, .section-card { background: rgba(16, 28, 46, 0.88); border: 1px solid var(--border); box-shadow: var(--shadow); backdrop-filter: blur(16px); }
+    .hero { border-radius: 32px; padding: 36px; display: grid; gap: 24px; animation: fadeUp 0.8s ease both; }
+    .section-card, .card { animation: fadeUp 0.8s ease both; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+    .brand { font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .nav { display: flex; gap: 16px; color: var(--muted); align-items: center; }
+    .theme-toggle { border: 1px solid var(--border); background: var(--panel-2); color: var(--text); padding: 8px 12px; border-radius: 999px; cursor: pointer; }
+    .nav a:hover { color: var(--text); }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 26px; align-items: center; }
+    .badge { display: inline-block; padding: 8px 14px; border-radius: 999px; background: rgba(76, 201, 240, 0.14); color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+    h1 { font-size: clamp(2.4rem, 4vw, 3.6rem); margin: 0 0 12px; line-height: 1.1; }
+    .lead { color: var(--muted); font-size: 1.08rem; max-width: 700px; }
+    .buttons { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .btn { display: inline-block; padding: 13px 20px; border-radius: 999px; font-weight: 700; }
+    .btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: white; }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); }
+    .profile-card { padding: 24px; border-radius: 24px; background: linear-gradient(145deg, var(--panel-2), #0e1726); border: 1px solid var(--border); }
+    .avatar { width: 110px; height: 110px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display: grid; place-items: center; font-size: 2rem; font-weight: 800; margin-bottom: 16px; }
+    .profile-card ul { padding-left: 18px; color: var(--muted); }
+    .section { margin-top: 26px; }
+    .section-card { border-radius: 24px; padding: 24px; }
+    .section h2 { margin-top: 0; margin-bottom: 8px; }
+    .section p { color: var(--muted); }
+    .skills-grid, .exp-grid, .project-grid { display: grid; gap: 18px; }
+    .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .exp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .card { border-radius: 20px; padding: 18px; }
+    .card h3 { margin: 0 0 8px; }
+    .card p, .card li { color: var(--muted); }
+    .tag { display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(124, 97, 255, 0.16); color: #b8a8ff; margin: 6px 8px 0 0; font-size: 0.85rem; }
+    .timeline { display: grid; gap: 10px; padding-left: 20px; }
+    .timeline li { color: var(--muted); }
+    .contact { display: grid; gap: 18px; }
+    .contact-card { padding: 18px; border-radius: 20px; background: var(--panel-2); border: 1px solid var(--border); }
+    .footer { text-align: center; padding: 24px 0 10px; color: var(--muted); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .skills-grid, .exp-grid, .project-grid { grid-template-columns: 1fr; }
+      .topbar { flex-direction: column; gap: 10px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="topbar">
+        <div class="brand">Portfolio</div>
+        <nav class="nav">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+          <button class="theme-toggle" id="themeToggle" type="button">🌙 Dark</button>
+        </nav>
+      </div>
+
+      <div class="hero-grid">
+        <div>
+          <div class="badge">Full Stack Python Developer | Gen AI Learner</div>
+          <h1>I build smart data solutions with Python, AI, and big data tools.</h1>
+          <p class="lead">I am Md Shahnawaz, learning full stack Python with Gen AI and bringing 3 years of hands-on experience in Big Data and Hadoop technologies such as SQL, HDFS, Linux commands, Hive, Power BI, and Excel.</p>
+          <div class="buttons">
+            <a class="btn btn-primary" href="#contact">Hire Me</a>
+            <a class="btn btn-outline" href="#projects">View Projects</a>
+          </div>
+        </div>
+
+        <div class="profile-card">
+          <div class="avatar">MS</div>
+          <h3>Md Shahnawaz</h3>
+          <p style="color: var(--muted); margin: 0 0 12px;">Python • Gen AI • Big Data • Data Analytics</p>
+          <ul>
+            <li>Learning full stack Python development</li>
+            <li>Working with Gen AI concepts and practical AI workflows</li>
+            <li>Experienced in Hadoop ecosystem and data engineering basics</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="section-card">
+        <h2>About Me</h2>
+        <p>I am passionate about building practical solutions using Python, AI, and data technologies. My background includes 3 years of experience in Big Data, Hadoop, SQL, Linux, Hive, Power BI, and Excel, and I am now expanding into full stack Python development and Generative AI.</p>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="section-card">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="card">
+            <h3>Programming & Web</h3>
+            <p>Python, Flask, HTML, CSS, JavaScript, REST APIs</p>
+            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">HTML</span><span class="tag">CSS</span>
+          </div>
+          <div class="card">
+            <h3>Gen AI</h3>
+            <p>Prompt engineering, AI-assisted development, LLM workflow basics</p>
+            <span class="tag">Gen AI</span><span class="tag">LLM</span><span class="tag">Prompting</span>
+          </div>
+          <div class="card">
+            <h3>Data & Big Data</h3>
+            <p>SQL, HDFS, Hive, Linux commands, data processing basics</p>
+            <span class="tag">SQL</span><span class="tag">HDFS</span><span class="tag">Hive</span><span class="tag">Linux</span>
+          </div>
+          <div class="card">
+            <h3>Analytics</h3>
+            <p>Power BI dashboards, Excel reporting, data cleaning</p>
+            <span class="tag">Power BI</span><span class="tag">Excel</span><span class="tag">Reporting</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-card">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          <div class="card">
+            <h3>Python Automation Tool</h3>
+            <p>Built scripts to automate repetitive tasks and handle data processing workflows efficiently.</p>
+          </div>
+          <div class="card">
+            <h3>Gen AI Learning App</h3>
+            <p>Created simple AI-assisted experiences using Python and prompt-driven logic.</p>
+          </div>
+          <div class="card">
+            <h3>Data Reporting Dashboard</h3>
+            <p>Used SQL, Excel, and Power BI to build reporting solutions and business insights.</p>
+          </div>
+          <div class="card">
+            <h3>Hadoop & Hive Practice</h3>
+            <p>Worked with big data storage and query concepts through HDFS and Hive.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-card">
+        <h2>Experience</h2>
+        <div class="exp-grid">
+          <div class="card">
+            <h3>3 Years at IQVIA</h3>
+            <ul class="timeline">
+              <li>Worked in a data-driven environment with strong business and reporting focus</li>
+              <li>Gained experience in big data and analytics workflows</li>
+              <li>Applied SQL, Excel, and reporting tools in day-to-day operations</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Big Data & Hadoop Experience</h3>
+            <ul class="timeline">
+              <li>Worked with Hadoop ecosystem fundamentals</li>
+              <li>Handled data storage and processing tasks using HDFS</li>
+              <li>Used Hive for relational data querying</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="section-card contact">
+        <h2>Contact Me</h2>
+        <p>I am open to internships, entry-level developer roles, and data/AI learning opportunities.</p>
+        <div class="contact-card">Phone: <strong>8618005086</strong></div>
+        <div class="contact-card">Email: <strong>mdshahnawazmomin2@gmail.com</strong></div>
+        <div class="contact-card">LinkedIn: <strong><a href="https://linkedin.com/in/md-shahnawaz-m-611b7b1a9" target="_blank" rel="noreferrer">linkedin.com/in/md-shahnawaz-m-611b7b1a9</a></strong></div>
+        <div class="contact-card">GitHub: <strong><a href="https://github.com/mdshahnawazmomin" target="_blank" rel="noreferrer">github.com/mdshahnawazmomin</a></strong></div>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 My Portfolio | Built with HTML, CSS, and passion for technology</div>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const savedTheme = localStorage.getItem('portfolio-theme');
+
+    function applyTheme(theme) {
+      document.body.classList.toggle('light-theme', theme === 'light');
+      if (themeToggle) {
+        themeToggle.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
+      }
+    }
+
+    const initialTheme = savedTheme || (prefersLight ? 'light' : 'dark');
+    applyTheme(initialTheme);
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('portfolio-theme', nextTheme);
+        applyTheme(nextTheme);
+      });
+    }
+  </script>
+</body>
+</html>
